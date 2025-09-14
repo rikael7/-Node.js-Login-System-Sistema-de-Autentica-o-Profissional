@@ -1,0 +1,157 @@
+/* public/css/style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Esta cor será coberta pelo fundo animado */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Manter para centralização se particles-js falhar */
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Evita barras de rolagem desnecessárias para o fundo */
+    position: relative; /* Necessário para posicionar o fundo animado */
+}
+
+/* Estilo para o fundo animado */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a2e; /* Fundo mais escuro para o contraste do azul */
+    background-image: url('');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    z-index: 1; /* Garante que o fundo fique abaixo do conteúdo de login */
+}
+
+/* Wrapper para centralizar o formulário acima do fundo animado */
+.login-wrapper {
+    position: relative; /* Necessário para que o z-index funcione */
+    z-index: 2; /* Garante que o conteúdo de login fique acima do fundo animado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.2); /* Fundo ainda mais transparente/escuro */
+    backdrop-filter: blur(8px); /* Efeito de blur para o que estiver atrás */
+    border: 1px solid #61dafb; /* Contorno azul claro principal */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(97, 218, 251, 0.4); /* Sombra azul clara */
+    width: 350px;
+    text-align: center;
+    color: #e0f7fa; /* Cor do texto para contraste com fundo escuro e azul */
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #61dafb; /* Cor azul clara para o título */
+    text-shadow: 0 0 5px rgba(97, 218, 251, 0.7); /* Efeito de brilho no título */
+}
+
+.login-container p.error-message { /* Seletor mais específico para mensagem de erro */
+    color: #ff6347; /* Vermelho mais vibrante para erro */
+}
+
+.social-login-text {
+    color: #e0f7fa; /* Cor do texto para "Ou entre com" */
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px; /* Aumenta um pouco o padding */
+    margin-bottom: 15px;
+    border: 1px solid #61dafb; /* Borda do input azul claro */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo do input semi-transparente branco */
+    color: #e0f7fa; /* Texto do input branco azulado */
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #00bcd4; /* Azul mais forte ao focar */
+    box-shadow: 0 0 8px rgba(97, 218, 251, 0.5); /* Sombra ao focar */
+}
+
+.login-form input::placeholder {
+    color: rgba(224, 247, 250, 0.7); /* Placeholder mais claro e azulado */
+}
+
+.login-form button {
+    width: 100%;
+    padding: 12px; /* Aumenta um pouco o padding */
+    background: linear-gradient(45deg, #00bcd4, #61dafb); /* Gradiente azul para o botão */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 188, 212, 0.4); /* Sombra para o botão */
+    transition: all 0.3s ease; /* Transição para todos os efeitos */
+}
+
+.login-form button:hover:not(:disabled) {
+    background: linear-gradient(45deg, #61dafb, #00bcd4); /* Inverte o gradiente ao passar o mouse */
+    box-shadow: 0 6px 15px rgba(0, 188, 212, 0.6);
+    transform: translateY(-2px); /* Efeito de levantar */
+}
+
+.login-form button:disabled {
+    background: #4a6c75; /* Cinza azulado para desabilitado */
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.login-container a {
+    color: #00bcd4; /* Azul ciano para links */
+    text-decoration: none;
+    margin-top: 15px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.login-container a:hover {
+    color: #80deea; /* Azul mais claro ao passar o mouse no link */
+    text-decoration: underline;
+}
+
+/* Cor específica do botão do Instagram */
+.instagram-btn {
+    /* Mantive o gradiente original do Instagram, mas você pode mudar para azul se preferir */
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    box-shadow: 0 4px 10px rgba(40, 90, 235, 0.4);
+}
+
+.instagram-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(40, 90, 235, 0.6);
+}
+
+/* Estilos responsivos para telas menores (smartphones) */
+@media (max-width: 600px) {
+    .login-container {
+        width: 90%;
+        padding: 20px;
+        box-shadow: none;
+        margin-top: 15vh;
+        border: none; /* Remove a borda em mobile para um visual mais limpo */
+        backdrop-filter: blur(5px); /* Menos blur em mobile */
+    }
+
+    body {
+        align-items: flex-start;
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+}

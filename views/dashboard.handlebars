@@ -1,0 +1,228 @@
+<!-- <h2>Bem-vindo, {{nomeUsuario}}!</h2>
+<p>Este é o seu painel de controle. Você está logado.</p>
+<a href="/logout">Sair</a> 
+!-->
+<!-- Canvas para partículas -->
+  <canvas id="particles"></canvas>
+
+  <!-- Canvas para partículas -->
+  <canvas id="particles"></canvas>
+
+  <!-- Conteúdo do Dashboard -->
+  <div class="dashboard">
+    <h1>🌌 Dashboard </h1>
+    <div class="cards">
+      <div class="card">
+        <h2>Usuários</h2>
+        <p>1.240 online</p>
+      </div>
+      <div class="card">
+        <h2>Vendas</h2>
+        <p>R$ 89.000</p>
+      </div>
+      <div class="card">
+    <h2>Status</h2>
+    <p><span class="status-dot"></span> Servidor ativo</p>
+    </div>
+      </div>
+    </div>
+  </div>
+    <div class="credits">
+  <p>Feito por <strong>Rikael Ribeiro</strong> 🚀</p>
+</div>
+
+
+
+
+
+  <script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray;
+
+    // Criar partículas
+    function initParticles() {
+      particlesArray = [];
+      for (let i = 0; i < 80; i++) {
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+        let size = 2;
+        let speedX = (Math.random() - 0.5) * 1;
+        let speedY = (Math.random() - 0.5) * 1;
+        particlesArray.push({ x, y, size, speedX, speedY });
+      }
+    }
+
+    // Desenhar partículas
+    function drawParticles(p) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = "#00f7ff";
+      ctx.fill();
+    }
+
+    // Atualizar posição
+    function updateParticles(p) {
+      p.x += p.speedX;
+      p.y += p.speedY;
+
+      if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+      drawParticles(p);
+    }
+
+    // Conectar partículas
+    function connectParticles() {
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          let dx = particlesArray[a].x - particlesArray[b].x;
+          let dy = particlesArray[a].y - particlesArray[b].y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 120) {
+            ctx.strokeStyle = "rgba(0, 247, 255, 0.2)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    // Loop da animação
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(updateParticles);
+      connectParticles();
+      requestAnimationFrame(animate);
+    }
+
+    initParticles();
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+  </script>
+
+
+   <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      font-family: "Orbitron", sans-serif;
+      background: #0a0a0f;
+      color: #fff;
+      height: 100vh;
+    }
+
+    /* Canvas ocupa toda a tela */
+    #particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Dashboard central */
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .dashboard h1 {
+      font-size: 2.5rem;
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00f7ff, 0 0 20px #0ff;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.4);
+      border-radius: 15px;
+      padding: 20px 40px;
+      width: 200px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #00f7ff;
+    }
+
+  .credits {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #00f7ff;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.credits:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.9), 0 0 50px rgba(0, 255, 255, 0.6);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #00ff00;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  animation: pulse 1.5s infinite;
+  vertical-align: middle;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+  </style>

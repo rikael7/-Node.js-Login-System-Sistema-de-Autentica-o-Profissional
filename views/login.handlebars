@@ -1,0 +1,17 @@
+<div id="particles-js"></div> <div class="login-wrapper"> <div class="login-container">
+        <h2>Login</h2>
+        {{#if mensagem}}
+            <p class="error-message">{{mensagem}}</p>
+        {{/if}}
+        <form action="/login" method="POST" class="login-form">
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="senha" name="senha" placeholder="Senha" required>
+            <button type="submit" id="login-button">Entrar</button>
+        </form>
+        <p>Ainda não tem uma conta? <a href="/register">Crie uma aqui</a>.</p>
+    </div>
+</div>
+
+<script src="/js/login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="/js/particles-config.js"></script>
