@@ -51,12 +51,6 @@ app.get('/register', (req, res) => {
     // Renderiza a view 'register', passando a mensagem como parâmetro
     res.render('register', { mensagem: req.query.mensagem });
 });
-
-
-
-
-                    // --- Rotas de Processamento de Formulários 🚀​ (POST) ---
-
 // Rota para pular o login (GET)
 app.get('/skip-login', (req, res) => {
     // Define as variáveis de sessão para simular um login bem-sucedido de convidado
@@ -67,6 +61,12 @@ app.get('/skip-login', (req, res) => {
     // Redireciona para o dashboard
     res.redirect('/dashboard');
 });
+
+
+                    // --- Rotas de Processamento de Formulários 🚀​ (POST) ---
+
+
+
 // Rota para processar o formulário de registro
 app.post('/register', async (req, res) => {
     // Extrai os dados do corpo da requisição
