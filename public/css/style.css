@@ -155,3 +155,27 @@ body {
         overflow-y: auto;
     }
 }
+/* Estilo para o botão de pular login */
+.skip-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px; /* Espaço entre o botão de login e o de pular */
+    background: transparent; /* Fundo transparente */
+    color: #e0f7fa; /* Cor do texto para contraste */
+    border: 1px solid #61dafb; /* Borda azul clara para manter o tema */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.skip-btn:hover {
+    background-color: rgba(97, 218, 251, 0.1); /* Fundo azul claro transparente ao passar o mouse */
+    border-color: #00bcd4; /* Azul mais forte */
+}
+
+.skip-btn:active {
+    transform: translateY(1px); /* Pequeno efeito de clique */
+}

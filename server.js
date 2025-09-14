@@ -18,12 +18,9 @@ app.set('view engine', 'handlebars'); // Define a extensão dos arquivos de view
 app.set('views', './views'); // Define o diretório onde os arquivos de view estão localizados
 
 //------------------------------------------------------------------------------------------------
-
 // --- Middlewares ---
 // Permite que o Express processe dados de formulários (via req.body)
 app.use(express.urlencoded({ extended: true }));
-
-
 // Configura o middleware de sessão
 app.use(session({
     secret: 'sua_chave_secreta', // Chave secreta para assinar o cookie da sessão
@@ -32,21 +29,11 @@ app.use(session({
     cookie: { secure: false } // Define se o cookie deve ser enviado apenas por HTTPS (use true em produção)
 }));
 
-// --- Rotas de Navegação (GET) ---
+//----------------------------------------------------------------
 
-// Rota para a página de login
-app.get('/login', (req, res) => {
-    // Renderiza a view 'login', passando a mensagem como parâmetro
-    res.render('login', { mensagem: req.query.mensagem });
-});
 
-// Rota para a página de registro
-app.get('/register', (req, res) => {
-    // Renderiza a view 'register', passando a mensagem como parâmetro
-    res.render('register', { mensagem: req.query.mensagem });
-});
-
-// Rota principal (redireciona para o login se não estiver logado)
+                            // --- 🔥​Rotas de Navegação (GET) ---
+// ROTA PRINCIPAL (redireciona para o login se não estiver logado)
 app.get('/', (req, res) => {
     // Verifica se o usuário já está logado na sessão
     if (req.session.isLoggedIn) {
@@ -54,9 +41,32 @@ app.get('/', (req, res) => {
     }
     res.redirect('/login'); // Se não, redireciona para a página de login
 });
+// Rota para a página de LOGIN
+app.get('/login', (req, res) => {
+    // Renderiza a view 'login', passando a mensagem como parâmetro
+    res.render('login', { mensagem: req.query.mensagem });
+});
+// Rota para a página de REGISTRO
+app.get('/register', (req, res) => {
+    // Renderiza a view 'register', passando a mensagem como parâmetro
+    res.render('register', { mensagem: req.query.mensagem });
+});
 
-// --- Rotas de Processamento de Formulários (POST) ---
 
+
+
+                    // --- Rotas de Processamento de Formulários 🚀​ (POST) ---
+
+// Rota para pular o login (GET)
+app.get('/skip-login', (req, res) => {
+    // Define as variáveis de sessão para simular um login bem-sucedido de convidado
+    req.session.isLoggedIn = true;
+    req.session.userId = 'guest_user';
+    req.session.nome = 'Convidado';
+
+    // Redireciona para o dashboard
+    res.redirect('/dashboard');
+});
 // Rota para processar o formulário de registro
 app.post('/register', async (req, res) => {
     // Extrai os dados do corpo da requisição
@@ -117,7 +127,11 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// --- Rota Protegida e Logout ---
+
+
+
+
+                                // --- 🚀​ Rota Protegida e Logout(GET) ---
 
 // Rota do dashboard (só acessível se o usuário estiver logado)
 app.get('/dashboard', (req, res) => {
@@ -127,9 +141,9 @@ app.get('/dashboard', (req, res) => {
         return res.redirect('/login?mensagem=Por favor, faça login.');
     }
     // Renderiza o dashboard e passa o nome do usuário da sessão
-    res.render('dashboard', {
-         nomeUsuario: req.session.nome 
-         });
+     //res.render('dashboard', { layout: 'dashboard-main' });
+    res.render('dashboard', 
+         { layout: 'dashboard-main' }); // Cria o dashboard com um main próprio
 });
 
 // Rota para fazer logout
@@ -144,6 +158,11 @@ app.get('/logout', (req, res) => {
     });
 });
 
+
+
+
+
+                                            // --- IGNORE ---
 // Inicia o servidor e escuta na porta definida
 app.listen(PORT, '0.0.0.0',  () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
